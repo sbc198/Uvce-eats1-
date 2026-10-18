@@ -1,0 +1,6 @@
+{
+  "name": "UVCE Eats — Campus Food Ordering & Live Pickup",
+  "description": "Smart campus food ordering app for UVCE K.R. Circle Campus. Real-time order tracking, UPI payments, canteen admin dashboard, live notifications, and digital pickup queue.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

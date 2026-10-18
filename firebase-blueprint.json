@@ -1,0 +1,280 @@
+{
+  "entities": {
+    "AdminRecord": {
+      "title": "Admin Record",
+      "description": "Indicates administrative authorization for managing orders and menu",
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string",
+          "description": "Admin email address"
+        },
+        "role": {
+          "type": "string",
+          "description": "Role level",
+          "enum": ["owner", "staff"]
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "ISO timestamp of creation"
+        }
+      },
+      "required": ["email", "role"]
+    },
+    "UserProfile": {
+      "title": "User Profile",
+      "description": "Registered campus student or staff profile",
+      "type": "object",
+      "properties": {
+        "uid": {
+          "type": "string",
+          "description": "Firebase user ID"
+        },
+        "email": {
+          "type": "string",
+          "description": "User email address"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Full name or student name"
+        },
+        "role": {
+          "type": "string",
+          "description": "User role",
+          "enum": ["student", "owner", "staff"]
+        },
+        "usn": {
+          "type": "string",
+          "description": "University seat number"
+        },
+        "phone": {
+          "type": "string",
+          "description": "Contact phone number"
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "Account creation timestamp"
+        }
+      },
+      "required": ["uid", "email", "displayName"]
+    },
+    "MenuItem": {
+      "title": "Menu Item",
+      "description": "Canteen food or drink item",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier of item"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of food item"
+        },
+        "price": {
+          "type": "number",
+          "description": "Price in INR"
+        },
+        "category": {
+          "type": "string",
+          "description": "Category name",
+          "enum": ["Sandwiches", "Burgers", "Snacks", "Drinks", "Meals", "South Indian", "Specials"]
+        },
+        "emoji": {
+          "type": "string",
+          "description": "Emoji icon representation"
+        },
+        "available": {
+          "type": "boolean",
+          "description": "Whether currently available in canteen"
+        },
+        "desc": {
+          "type": "string",
+          "description": "Description of the food item"
+        },
+        "isVeg": {
+          "type": "boolean",
+          "description": "Whether the item is vegetarian"
+        },
+        "updatedAt": {
+          "type": "string",
+          "description": "Last updated timestamp"
+        }
+      },
+      "required": ["id", "name", "price", "category", "available"]
+    },
+    "Order": {
+      "title": "Order",
+      "description": "Campus food order placed by student",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Order code (e.g. UV-10492)"
+        },
+        "studentUid": {
+          "type": "string",
+          "description": "UID of the placing student"
+        },
+        "studentName": {
+          "type": "string",
+          "description": "Name of the student"
+        },
+        "studentEmail": {
+          "type": "string",
+          "description": "Email of the student"
+        },
+        "studentUsn": {
+          "type": "string",
+          "description": "USN of the student"
+        },
+        "studentPhone": {
+          "type": "string",
+          "description": "Phone number"
+        },
+        "paymentMethod": {
+          "type": "string",
+          "description": "Chosen payment method",
+          "enum": ["Pay at counter", "UPI at counter", "Online UPI", "Debit/Credit card", "Net banking"]
+        },
+        "paymentStatus": {
+          "type": "string",
+          "description": "Current payment verification status",
+          "enum": ["Pay on collection", "UPI Paid - Verified", "UPI Submitted - Verification Pending", "Payment Pending", "Paid Online"]
+        },
+        "upiTransactionId": {
+          "type": "string",
+          "description": "UPI reference/UTR number submitted by student"
+        },
+        "pickupTime": {
+          "type": "string",
+          "description": "Desired pickup time"
+        },
+        "couponCode": {
+          "type": "string",
+          "description": "Coupon code applied"
+        },
+        "discount": {
+          "type": "number",
+          "description": "Discount amount in INR"
+        },
+        "total": {
+          "type": "number",
+          "description": "Total payable amount in INR"
+        },
+        "status": {
+          "type": "string",
+          "description": "Live order status",
+          "enum": ["Order Placed", "Accepted", "Preparing", "Ready for Pickup", "Collected", "Cancelled"]
+        },
+        "tokenNumber": {
+          "type": "number",
+          "description": "Token number for pickup counter"
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "Order creation timestamp"
+        },
+        "updatedAt": {
+          "type": "string",
+          "description": "Order status update timestamp"
+        }
+      },
+      "required": ["id", "studentUid", "studentName", "total", "status", "createdAt"]
+    },
+    "CanteenConfig": {
+      "title": "Canteen Configuration",
+      "description": "Global settings for canteen operations",
+      "type": "object",
+      "properties": {
+        "announcement": {
+          "type": "string",
+          "description": "Broadcast notice to students"
+        },
+        "prepTime": {
+          "type": "string",
+          "description": "Current average preparation estimate"
+        },
+        "isOpen": {
+          "type": "boolean",
+          "description": "Whether canteen is currently accepting orders"
+        },
+        "upiVpa": {
+          "type": "string",
+          "description": "UPI ID for receiving student payments"
+        },
+        "upiPayeeName": {
+          "type": "string",
+          "description": "Payee name appearing on UPI apps"
+        },
+        "updatedAt": {
+          "type": "string",
+          "description": "Timestamp of configuration update"
+        }
+      },
+      "required": ["announcement", "prepTime", "isOpen", "upiVpa"]
+    },
+    "Review": {
+      "title": "Review",
+      "description": "Student feedback and rating on food experience",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Review ID"
+        },
+        "studentUid": {
+          "type": "string",
+          "description": "UID of reviewer"
+        },
+        "studentName": {
+          "type": "string",
+          "description": "Name of reviewer"
+        },
+        "item": {
+          "type": "string",
+          "description": "Reviewed food item"
+        },
+        "rating": {
+          "type": "number",
+          "description": "Star rating 1 to 5"
+        },
+        "feedback": {
+          "type": "string",
+          "description": "Written review"
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "Timestamp of review"
+        }
+      },
+      "required": ["id", "studentUid", "studentName", "item", "rating", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/admins/{adminId}": {
+      "schema": "AdminRecord",
+      "description": "Admin authorization mapping collection"
+    },
+    "/users/{userId}": {
+      "schema": "UserProfile",
+      "description": "User profile information"
+    },
+    "/menu/{menuId}": {
+      "schema": "MenuItem",
+      "description": "Menu items available in the canteen"
+    },
+    "/orders/{orderId}": {
+      "schema": "Order",
+      "description": "Student food pickup orders"
+    },
+    "/canteen_config/{configId}": {
+      "schema": "CanteenConfig",
+      "description": "Canteen operational configuration and notices"
+    },
+    "/reviews/{reviewId}": {
+      "schema": "Review",
+      "description": "Student ratings and reviews"
+    }
+  }
+}
